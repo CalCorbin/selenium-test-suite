@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-#This test suite was built to verify the static content of the Exaptive QA Challenge.
+#This test suite was built to verify the static content of the test Xap.
 
 class isExaptiveQAChallenge(unittest.TestCase):
     def setUp(self):

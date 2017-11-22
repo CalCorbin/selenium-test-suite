@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+#This is my test suite, these tests will run together to ensure current
+#functionality of the Exaptive QA Challenge.
 
 class isExaptiveQAChallenge(unittest.TestCase):
     def setUp(self):
@@ -74,9 +76,9 @@ class inputBoxTwo(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_box_two(self):
-    #This test simulates user input in the mirrored text box. Not all text from send_keys will be entered, this appears
-    #to be an issue with the input itself. I replicated this issue manually. Therefore the assert only checks
-    #to ensure the input element is on the page.
+        #This test simulates user input in the mirrored text box. Not all text from send_keys will be entered, this appears
+        #to be an issue with the input itself. I replicated this issue manually. Therefore the assert only checks
+        #to ensure the input element is on the page.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))

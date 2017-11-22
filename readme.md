@@ -4,7 +4,7 @@ This is a suite of Selenium tests written in Python. These tests verify the curr
 The test cases use the Python unittest module and are intended to guard against breaking changes to the application. The test
 suite has been broken down into three separate files. There is the staticContestTest which is used to test and verify static
 content on the page. Next there is the functionalContentTest which is used to verify all functional content on the page.
-Finally there is the completeTestSuite test, this test contains the entire suite of tests.
+Finally there is the completeTestSuite, this test contains the entire suite of tests.
 
 This test suite is intended to specifically ensure the following behavior:
 1. A user can type into the left textbox and see their text mirrored into the right textbox.

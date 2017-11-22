@@ -4,8 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-#This is my test suite, these tests will run together to ensure current
-#functionality of the Exaptive QA Challenge.
+#This test suite was built to verify the functionality of the Exaptive QA Challenge.
+#This test suite has static content tests as well as functional content tests.
 
 class isExaptiveQAChallenge(unittest.TestCase):
     def setUp(self):
@@ -13,7 +13,7 @@ class isExaptiveQAChallenge(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_page_title(self):
-    #Simple test that ensures this page is the QA Challenge
+        #1- Simple test that ensures this page is the QA Challenge.
         driver = self.driver
         assert "QA Challenge" in driver.title
 
@@ -26,7 +26,7 @@ class ensureCurrentJquery(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_jquery_url_correct(self):
-        #This test is intended to ensure that the version of jquery on the page is up to date per the test case.
+        #2- This test is intended to ensure that the version of jquery on the page is up to date per the test case.
         driver = self.driver
         jqueryXpath = ('/html/head/div[1]/script[1]')
         jqueryElement = WebDriverWait(driver, 10).until(lambda driver: driver.find_element_by_xpath(jqueryXpath))
@@ -41,7 +41,8 @@ class ensureCurrentSemanticScript(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_semantic_script_correct(self):
-        #This test is intended to ensure that the correct version of semantic script is up to date.
+        #3- This test is intended to ensure that the correct version of semantic script is up to date.
+        #Semantic min is used in the QA Challenge test Xap script functionality, that is why it is tested.
         driver = self.driver
         semanticMinXpath = ('/html/head/div[1]/script[2]')
         semanticMinElement = WebDriverWait(driver, 10).until(lambda driver: driver.find_element_by_xpath(semanticMinXpath))
@@ -56,10 +57,13 @@ class inputBoxOne(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_box_one(self):
-    #Simulates user input in text box one
+        #4- Ensures user can input text in box one.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
+        #loadingPage is a wait used to ensure the script is entirely loaded before sending keys. If this
+        #wait is not used, send_keys will send before scripts are loaded and text cannot be mirrored. This
+        #wait can be found through out the tests in this suite.
         userInput = 'I am sample text.'
         inputBoxOneCSS = "input"
         inputElementOne = WebDriverWait(driver, 10).until(lambda driver: driver.find_element_by_css_selector(inputBoxOneCSS))
@@ -76,9 +80,9 @@ class inputBoxTwo(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_box_two(self):
-        #This test simulates user input in the mirrored text box. Not all text from send_keys will be entered, this appears
-        #to be an issue with the input itself. I replicated this issue manually. Therefore the assert only checks
-        #to ensure the input element is on the page.
+        #5- This test simulates user input in the mirrored text box. Not all text from send_keys will be entered,
+        #this appears to be an issue with the input itself. I replicated this issue manually. Therefore the assert
+        #only checks to ensure the input element is on the page.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
@@ -98,7 +102,7 @@ class inputMirrorFunctionality(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_mirror(self):
-        #This test is intended to ensure that the user input text is correctly mirrored in the adjacent input box.
+        #6- This test is intended to ensure that the user input text is correctly mirrored in the adjacent input box.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
@@ -114,6 +118,8 @@ class inputMirrorFunctionality(unittest.TestCase):
             print ("Success. Input text is mirrored.")
         else:
             print ("Failure. Input text is not mirrored, please reference test_input_mirror.")
+        #The if else statement used here is to give an idea of what is going on with a test
+        #outside of the normal assertion method. These can be found throughout the suite.
         assert userInput in inputElementTwo.get_attribute("value")
 
     def tearDown(self):
@@ -125,7 +131,7 @@ class inputMirrorSpecialCharacterFunctionality(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_special_char(self):
-        #This test is intended to ensure that special character text is correctly mirrored in the adjacent input box.
+        #7- This test is intended to ensure that special character text is correctly mirrored in the adjacent input box.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
@@ -152,7 +158,7 @@ class InputMaxLength(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_maxlength (self):
-        #This test is intended to test the maxlength of the input box in which text is mirrored.
+        #8- This test is intended to test the maxlength of the input box in which text is mirrored.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
@@ -179,7 +185,7 @@ class inputMirrorDeleteTextFunctionality(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_delete_char(self):
-        #This test is intended to ensure that user can delete text in the left textbox and see the deletion mirrored in the right one.
+        #9- This test is intended to ensure that the user can delete text in the left textbox and see the deletion mirrored in the right one.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))
@@ -208,7 +214,7 @@ class ClearButtonFunction(unittest.TestCase):
         self.driver.get("https://labs.exaptive.city/xap/78c1ece0-c639-11e7-b984-d7a15f6dfbde?version=0.3.0")
 
     def test_input_clear_button (self):
-        #This test is intended to test the function of the clear button to clear text from inputs.
+        #10- This test is intended to verify the ability of the clear button to clear text from inputs.
         driver = self.driver
         scriptUILocator = "div.xc-text-box.ui.icon.input.class"
         loadingPage = WebDriverWait(driver, 30).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, scriptUILocator)))

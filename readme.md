@@ -20,7 +20,7 @@ Once you have navigated to the correct directory in terminal, the tests can be r
 
 * Have the most up to date version of Python installed on your local machine.
 * Have Selenium installed.
-* Ensure the driver for Chrome is installed in local Python installation.
+* Ensure the driver for Chrome is installed in your local Python installation.
 
 ### Installing
 
